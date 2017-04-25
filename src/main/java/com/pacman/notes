@@ -1,0 +1,65 @@
+Pacman
+
+Board
+    GamePlayerMap
+        {GamePlayer : Location}
+
+    BarrierMap
+        {Barrier : Location}
+
+    checkCollisions(GamePlayerMap, BarrierMap)
+
+    checkGameOver()
+
+    gameLoop(){
+        foreach GamePlayer{
+            checkCollisions()
+            updateLocation
+        }
+    }
+
+GamePlayer
+    Types:
+        AbstractGhost
+        GhostDecorator
+        GhostLeft
+        GhostRight
+        GhostUp
+        GhostDown
+        RedGhostDecorator
+        BlueGhostDecorator
+        PurpleGhostDecorator
+        AttackingGhostDecorator
+        DefendingGhostDecorator
+        AbstractPacman
+        PacmanDecorator
+        PacmanLeft
+        PacmanRight
+        PacmanUp
+        PacmanDown
+        SuperPacmanDecorator (descendent of AbstractPacman and contains an AbstractPacman)
+        Mrs. PacmanDecorator
+    methods:
+        changeDirection()
+        getDirection
+        getAnimation
+
+// using DECORATOR PATTERN here minimizes # of subclasses and allows us to easily add additional functionality or skin to Ghosts or Pacman
+
+Item
+    Types
+        Coin
+        Cherry
+        Poison
+
+// use INHERITANCE because very different behavior between powerups
+
+Barrier
+    getImage
+    getLocation
+
+Location
+    topLeft
+    topRight
+    bottomLeft
+    bottomRight
