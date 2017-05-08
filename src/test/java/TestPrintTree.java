@@ -32,4 +32,10 @@ public class TestPrintTree {
     public void testPrintLevels(){
         tree.printLevels();
     }
+
+    @Test
+    public void testPrintLevelsZigZag(){ tree.printLevelsZigZag(); }
+
+    @Test
+    public void testVerticlePrint(){ tree.verticlePrintTree(); }
 }

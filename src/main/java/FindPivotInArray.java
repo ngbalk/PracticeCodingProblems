@@ -9,6 +9,9 @@ public class FindPivotInArray {
 
     private static int findPivotHelper(int[] arr, int min, int max){
         int midpoint = (max+min)/2;
+        if(min==max){
+            return -1;
+        }
         if(arr[midpoint+1]<arr[midpoint]){
             return arr[midpoint];
         }
