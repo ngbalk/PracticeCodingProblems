@@ -12,7 +12,7 @@ public class FizzBuzz {
             if(i%5==0){
                 toPrint+="buzz";
             }
-            if(toPrint.length()==0){
+            if(toPrint.equals("")){
                 toPrint+=i;
             }
             System.out.println(toPrint);

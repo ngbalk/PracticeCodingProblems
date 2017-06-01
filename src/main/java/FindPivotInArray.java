@@ -15,7 +15,7 @@ public class FindPivotInArray {
         if(arr[midpoint+1]<arr[midpoint]){
             return arr[midpoint];
         }
-        if(arr[midpoint]>max){
+        if(arr[midpoint]>arr[max]){
             return findPivotHelper(arr, midpoint+1,max);
         }
         else{

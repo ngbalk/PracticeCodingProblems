@@ -80,20 +80,22 @@ public class LinkedListOperations {
         LinkedListNode third = root.next;
 
 
-        while(third!=null){
+        while(true){
             second.next=first;
+            if(third==null){
+                break;
+            }
             first=second;
             second=third;
             third=third.next;
         }
-        second.next=first;
         return second;
     }
 
     public LinkedListNode removeDuplicates(LinkedListNode root){
         LinkedListNode current = root;
         while(current.next!=null){
-            if(current.next.data==current.data){
+            if(current.data==current.next.data){
                 current.next=current.next.next;
             }
             else{
