@@ -3,35 +3,66 @@
  */
 public class OptimizeStockBuysAndSells {
     public static int bestOneBuyOneSell(int[] prices){
-        int minSoFar = Integer.MAX_VALUE;
-        int maxSoFar = 0;
-        for(int p : prices){
-            if(p<minSoFar){
-                minSoFar=p;
+
+        int minI = 0;
+        int buyI = 0;
+
+        int sellI = 1;
+        int maxProfit = prices[1] - prices[0];
+
+        for(int i=0;i<prices.length;i++){
+            if(prices[i]<prices[minI]){
+                minI=i;
             }
-            if(maxSoFar<p-minSoFar){
-                maxSoFar=p-minSoFar;
+            if(maxProfit<prices[i]-prices[minI]){
+                maxProfit=prices[i]-prices[minI];
+                sellI = i;
+                buyI = minI;
             }
         }
-        return maxSoFar;
+        System.out.println("Buy: " + buyI);
+        System.out.println("Sell: " + sellI);
+        System.out.println("Profit: " + maxProfit);
+        return maxProfit;
     }
 
-//    public static int bestConsecutiveTwoBuysTwoSells(int[] prices){
-//        int[] bestProfitIfSoldTodayOrBefore = new int[prices.length];
-//        int[] bestProfitIfBoughtTodayOrLater = new int[prices.length];
-//
-//        // forward
-//        int minSoFar = 0;
-//        int bestProfitSoFar = 0;
-//        for(int i=0;i>prices.length;i++){
-//            if(minSoFar>prices[i]){
-//                minSoFar=prices[i];
-//            }
-//            if(bestProfitSoFar)
-//            bestProfitIfSoldTodayOrBefore[i]=prices[i]-minSoFar;
-//        }
-//
-//
-//        return 0;
-//    }
+    public static int bestConsecutiveTwoBuysTwoSells(int[] prices){
+        int[] forward = new int[prices.length];
+        int[] backwards = new int[prices.length];
+
+        // find profit by days to sell
+        int minSoFar = prices[0];
+        int bestProfit = prices[1] - prices[0];
+        for(int i=0;i>prices.length;i++){
+            if(minSoFar>prices[i]){
+                minSoFar=prices[i];
+            }
+            if(prices[i] - minSoFar > bestProfit){
+                bestProfit = prices[i] - minSoFar;
+            }
+            forward[i]=bestProfit;
+        }
+
+        // find profit by days to buy
+        int maxSoFar = prices[prices.length-1];
+        bestProfit = prices[prices.length-1] - prices[prices.length-2];
+        for(int i=prices.length-1;i>=0;i--){
+            if(prices[i]>maxSoFar){
+                maxSoFar=prices[i];
+            }
+            if(maxSoFar - prices[i] > bestProfit){
+                bestProfit = maxSoFar - prices[i];
+            }
+            backwards[i] = maxSoFar-prices[i];
+        }
+
+        bestProfit = forward[1] + backwards[1];
+        for(int i = 1;i<prices.length-2;i++){
+            if(forward[i] + backwards[i] > bestProfit) {
+                bestProfit = forward[i] + backwards[i];
+            }
+        }
+
+        return bestProfit;
+    }
 }
