@@ -183,4 +183,32 @@ public class SimpleBalancedTree {
         verticleHelper(node.right,offset+1,columnMap);
     }
 
+    public void levelPrintWithMap(){
+        Map<Integer, List<TreeNode>> levelMap = new HashMap<>();
+        levelHelper(root,0,levelMap);
+
+        Object[] groups = levelMap.keySet().toArray();
+        Arrays.sort(groups);
+        for(Object o : groups){
+            Integer group = (Integer) o;
+            for(TreeNode node : levelMap.get(group)){
+                System.out.print(node.value + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private void levelHelper(TreeNode node, int level, Map<Integer,List<TreeNode>> levelMap){
+        if(node==null){
+            return;
+        }
+        List<TreeNode> group = levelMap.get(level);
+        if(group==null){
+            group = new ArrayList<>();
+        }
+        group.add(node);
+        levelMap.put(level,group);
+        levelHelper(node.left, level+1,levelMap);
+        levelHelper(node.right,level+1,levelMap);
+    }
 }

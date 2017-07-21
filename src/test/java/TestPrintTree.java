@@ -38,4 +38,7 @@ public class TestPrintTree {
 
     @Test
     public void testVerticlePrint(){ tree.verticlePrintTree(); }
+
+    @Test
+    public void testLevelPrintWithMap(){ tree.levelPrintWithMap(); }
 }
